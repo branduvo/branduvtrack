@@ -1,0 +1,71 @@
+---
+layout: default
+title: Blog - Branduvo
+permalink: /blog/
+---
+
+<section class="blog-header">
+  <div class="container">
+    <h1>Branduvo Blog</h1>
+    <p class="lead">Insights, tips, and resources to help you select the best tools for your business.</p>
+  </div>
+</section>
+
+<section class="blog-content">
+  <div class="container">
+    <div class="blog-grid">
+      {% for post in site.posts %}
+        <article class="blog-card">
+          <div class="blog-card-content">
+            <div class="post-meta">
+              <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+              {% if post.categories %}
+                <span class="post-categories">
+                  {% for category in post.categories %}
+                    <span class="category">{{ category }}</span>
+                  {% endfor %}
+                </span>
+              {% endif %}
+            </div>
+            <h2 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+            <div class="post-excerpt">
+              {{ post.excerpt | strip_html | truncatewords: 30 }}
+            </div>
+            <div class="post-author">
+              <span>By {{ post.author | default: site.author }}</span>
+            </div>
+            <a href="{{ post.url | relative_url }}" class="read-more">Read Full Article</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="newsletter-signup">
+  <div class="container">
+    <div class="newsletter-content">
+      <h2>Never Miss a New Article</h2>
+      <p>Subscribe to our newsletter and receive updates on new blog posts and product reviews.</p>
+      <form class="newsletter-form" action="https://formspree.io/f/your-formspree-id" method="POST">
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+        <p class="form-disclaimer">We respect your privacy and will never share your information.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="post-categories">
+  <div class="container">
+    <h2>Browse by Category</h2>
+    <div class="categories-list">
+      {% assign categories = site.posts | map: "categories" | flatten | uniq %}
+      {% for category in categories %}
+        <a href="#" class="category-tag">{{ category }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,61 @@
+---
+layout: default
+---
+
+<article class="post">
+  <div class="container">
+    <header class="post-header">
+      <div class="post-meta">
+        <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">
+          {{ page.date | date: "%B %d, %Y" }}
+        </time>
+        
+        {% if page.categories %}
+          <div class="post-categories">
+            {% for category in page.categories %}
+              <span class="category-tag">{{ category }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      
+      <h1 class="post-title">{{ page.title }}</h1>
+      
+      <div class="post-author">
+        <p>By {{ page.author | default: site.author }}</p>
+      </div>
+    </header>
+    
+    <div class="post-content">
+      {{ content }}
+    </div>
+    
+    <footer class="post-footer">
+      {% include social_share.html %}
+      
+      {% if page.affiliate_disclosure %}
+        <div class="affiliate-notice">
+          <p><strong>Affiliate Disclosure:</strong> {{ page.affiliate_disclosure }}</p>
+        </div>
+      {% else %}
+        <div class="affiliate-notice">
+          <p><strong>Affiliate Disclosure:</strong> This post may contain affiliate links. We may earn a commission if you make a purchase through these links, at no additional cost to you. Please see our <a href="{{ '/affiliate-disclaimer' | relative_url }}">Affiliate Disclaimer</a> for more details.</p>
+        </div>
+      {% endif %}
+      
+      {% if site.related_posts.size > 0 %}
+        <div class="related-posts">
+          <h3>You might also like</h3>
+          <div class="related-posts-grid">
+            {% for post in site.related_posts limit:3 %}
+              <div class="related-post">
+                <h4><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h4>
+                <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </footer>
+  </div>
+</article>

@@ -1,0 +1,50 @@
+# Site settings
+title: Branduvo
+email: contact@branduvo.com
+description: >-
+  Premium tools and resources for digital entrepreneurs and creative professionals.
+  Our curated selection helps you grow your business with trusted solutions.
+baseurl: "" # Empty for local development
+url: "" # Empty for local development
+
+# For GitHub Pages deployment uncomment these:
+baseurl: "/branduvotrack" # the subpath of your site, e.g. /blog
+url: "https://branduvo.github.io" # the base hostname & protocol
+
+# Build settings
+markdown: kramdown
+permalink: /blog/:title/
+
+# Collections
+collections:
+  products:
+    output: true
+    permalink: /products/:path/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Branduvo Team"
+  - scope:
+      path: ""
+      type: "products"
+    values:
+      layout: "product_landing"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .gitignore
+  - README.md

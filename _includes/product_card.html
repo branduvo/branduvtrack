@@ -1,0 +1,30 @@
+{% comment %}
+  Product Card Component
+  
+  Parameters:
+  - name: Product name
+  - image: Image path
+  - description: Short product description
+  - url: Link to product page
+  - category: Product category
+{% endcomment %}
+
+<div class="product-card">
+  <div class="product-image">
+    <a href="{{ include.url | relative_url }}">
+      <svg class="product-logo" width="80" height="80">
+        <use xlink:href="{{ '/assets/images/' | append: include.image | relative_url }}"></use>
+      </svg>
+    </a>
+  </div>
+  
+  <div class="product-info">
+    <div class="product-category">{{ include.category }}</div>
+    <h3 class="product-name"><a href="{{ include.url | relative_url }}">{{ include.name }}</a></h3>
+    <p class="product-description">{{ include.description }}</p>
+    
+    <div class="product-actions">
+      <a href="{{ include.url | relative_url }}" class="btn btn-outline">Learn More</a>
+    </div>
+  </div>
+</div>

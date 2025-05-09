@@ -1,0 +1,149 @@
+---
+layout: default
+---
+
+<article class="product-landing">
+  <div class="container">
+    <header class="product-header">
+      <div class="product-header-content">
+        <h1 class="product-title">{{ page.title }}</h1>
+        <p class="product-tagline">{{ page.tagline }}</p>
+        <div class="product-meta">
+          <div class="product-category">
+            <span class="category-tag">{{ page.category }}</span>
+          </div>
+          
+          {% if page.rating %}
+            <div class="product-rating">
+              {% for i in (1..5) %}
+                {% if i <= page.rating %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                {% else %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                {% endif %}
+              {% endfor %}
+              <span class="rating-text">{{ page.rating }}/5</span>
+            </div>
+          {% endif %}
+        </div>
+        
+        <div class="product-actions">
+          <a href="{{ page.affiliate_link }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer" 
+             data-affiliate-track="true" 
+             data-product-name="{{ page.title }}" 
+             data-link-id="header-cta">Get {{ page.title }} Now</a>
+          
+          {% if page.trial_link %}
+            <a href="{{ page.trial_link }}" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Try for Free</a>
+          {% endif %}
+        </div>
+      </div>
+      
+      <div class="product-image">
+        <svg class="product-logo" width="100" height="100">
+          <use xlink:href="{{ '/assets/images/products/' | append: page.product_image | relative_url }}"></use>
+        </svg>
+      </div>
+    </header>
+    
+    {% if page.price_info %}
+      <div class="product-pricing">
+        <h3>Pricing</h3>
+        <div class="pricing-info">
+          {{ page.price_info | markdownify }}
+        </div>
+      </div>
+    {% endif %}
+    
+    <div class="product-content">
+      {{ content }}
+    </div>
+    
+    {% if page.key_features %}
+      <div class="key-features">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+          {% for feature in page.key_features %}
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="feature-details">
+                <h3>{{ feature.title }}</h3>
+                <p>{{ feature.description }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    
+    {% if page.pros_cons %}
+      <div class="pros-cons">
+        <div class="pros">
+          <h3>Pros</h3>
+          <ul>
+            {% for pro in page.pros_cons.pros %}
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                {{ pro }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        
+        <div class="cons">
+          <h3>Cons</h3>
+          <ul>
+            {% for con in page.pros_cons.cons %}
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                {{ con }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+    
+    <div class="product-cta">
+      <h2>Ready to Try {{ page.title }}?</h2>
+      <p>{{ page.cta_text }}</p>
+      <div class="cta-buttons">
+        <a href="{{ page.affiliate_link }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer"
+           data-affiliate-track="true" 
+           data-product-name="{{ page.title }}" 
+           data-link-id="footer-cta">Get Started with {{ page.title }}</a>
+        
+        {% if page.trial_link %}
+          <a href="{{ page.trial_link }}" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Start Free Trial</a>
+        {% endif %}
+      </div>
+    </div>
+    
+    <div class="affiliate-disclosure">
+      <p>
+        <strong>Disclosure:</strong> If you purchase through our affiliate links, we may earn a commission at no extra cost to you. 
+        See our <a href="{{ '/affiliate-disclaimer' | relative_url }}">Affiliate Disclaimer</a> for more details.
+      </p>
+    </div>
+  </div>
+</article>
+
+<section class="related-products">
+  <div class="container">
+    <h2>You Might Also Like</h2>
+    <div class="products-grid">
+      {% assign related_products = site.products | where_exp: "item", "item.url != page.url" | where: "category", page.category | limit: 3 %}
+      {% for product in related_products %}
+        {% include product_card.html 
+          name=product.title 
+          image=product.product_image 
+          description=product.tagline 
+          url=product.url 
+          category=product.category 
+        %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

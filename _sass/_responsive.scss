@@ -1,0 +1,230 @@
+// Responsive Styles
+// These styles handle the site's behavior on different screen sizes
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: $breakpoint-sm) {
+  /* Grid Layouts */
+  .products-grid,
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .testimonials-slider {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .related-posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Footer Layout */
+  .footer-section {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  
+  /* Product Features */
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: $breakpoint-md) {
+  /* Base Typography */
+  h1 {
+    font-size: 2.75rem;
+  }
+  
+  h2 {
+    font-size: 2.25rem;
+  }
+  
+  .lead {
+    font-size: 1.375rem;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: $spacing-xxl 0;
+  }
+  
+  .hero-content h1 {
+    font-size: 3.25rem;
+  }
+  
+  /* Grid Layouts */
+  .products-grid,
+  .posts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Navigation */
+  .nav-menu {
+    display: flex !important;
+  }
+  
+  /* Footer Layout */
+  .footer-logo {
+    flex: 0 0 30%;
+    max-width: 30%;
+    margin-bottom: 0;
+  }
+  
+  .footer-links {
+    flex: 0 0 70%;
+    max-width: 70%;
+  }
+  
+  .footer-section {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  
+  /* Product Landing Pages */
+  .product-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-xl;
+  }
+  
+  .product-header-content {
+    flex: 0 0 65%;
+    max-width: 65%;
+    text-align: left;
+  }
+  
+  .product-meta,
+  .product-actions {
+    justify-content: flex-start;
+  }
+  
+  .product-image {
+    flex: 0 0 30%;
+    max-width: 30%;
+    margin-bottom: 0;
+    order: 2;
+  }
+  
+  .pros-cons {
+    flex-direction: row;
+  }
+  
+  /* Related Posts */
+  .related-posts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: $breakpoint-lg) {
+  /* Base Typography */
+  h1 {
+    font-size: 3rem;
+  }
+  
+  /* Grid Layouts */
+  .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Product Features */
+  .feature-item {
+    padding: $spacing-sm;
+  }
+  
+  /* Social Share */
+  .social-share {
+    display: flex;
+    align-items: center;
+    
+    h4 {
+      margin-bottom: 0;
+      margin-right: $spacing-md;
+    }
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: $breakpoint-xl) {
+  .container {
+    padding-left: $spacing-lg;
+    padding-right: $spacing-lg;
+  }
+}
+
+/* Mobile-specific styles */
+@media (max-width: $breakpoint-md - 1) {
+  /* Navigation */
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: $white;
+    box-shadow: $shadow;
+    z-index: $z-index-dropdown;
+    padding: $spacing-sm 0;
+    
+    &.active {
+      display: flex;
+    }
+    
+    .nav-item {
+      margin: 0;
+      width: 100%;
+      
+      .nav-link {
+        padding: $spacing-sm $spacing-md;
+        display: block;
+      }
+    }
+  }
+  
+  /* Newsletter Form */
+  .newsletter-form .form-group {
+    flex-direction: column;
+    
+    input {
+      border-radius: $border-radius;
+      margin-bottom: $spacing-xs;
+    }
+    
+    button {
+      border-radius: $border-radius;
+    }
+  }
+  
+  /* Contact Form */
+  .contact-form {
+    .btn {
+      width: 100%;
+    }
+  }
+  
+  /* Social Share */
+  .share-buttons {
+    a span {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+// Main SCSS File
+// This imports all the partial files to create the complete stylesheet
+
+// Import variables first so they're available to all other partials
+@import "variables";
+
+// Import base styles
+@import "base";
+
+// Import layout components
+@import "layout";
+
+// Import UI components
+@import "components";
+
+// Import media queries and responsive styles
+@import "responsive";

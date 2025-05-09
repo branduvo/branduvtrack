@@ -1,0 +1,20 @@
+{% comment %}
+  Affiliate Link Include Template
+  
+  Parameters:
+  - product: The product name (e.g., "Canva")
+  - url: The affiliate link URL
+  - text: The link text (defaults to product name if not provided)
+  - location: The location on the page (e.g., "content", "sidebar", "header")
+  - class: Additional CSS classes for styling (optional)
+{% endcomment %}
+
+<a href="{{ include.url }}" 
+   class="affiliate-link {% if include.class %}{{ include.class }}{% endif %}" 
+   target="_blank" 
+   rel="noopener noreferrer sponsored"
+   data-affiliate-track="true"
+   data-product-name="{{ include.product }}"
+   data-link-id="{{ include.location | default: 'content' }}">
+  {{ include.text | default: include.product }}
+</a>

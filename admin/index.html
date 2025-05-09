@@ -1,0 +1,298 @@
+---
+layout: default
+title: Admin Dashboard
+permalink: /admin/
+---
+
+<div class="admin-dashboard">
+  <div class="container">
+    <h1>Affiliate Link Analytics</h1>
+    
+    <div class="admin-section">
+      <h2>Click Statistics</h2>
+      <div id="loading-message">Loading data...</div>
+      <div id="error-message" style="display: none;" class="error-alert"></div>
+      
+      <div id="statistics-container" style="display: none;">
+        <div class="statistics-summary">
+          <div class="stat-card">
+            <h3>Total Clicks</h3>
+            <p id="total-clicks">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Products Tracked</h3>
+            <p id="products-count">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Last Click</h3>
+            <p id="last-click">Never</p>
+          </div>
+        </div>
+        
+        <h3>Clicks by Product</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Clicks</th>
+              <th>First Click</th>
+              <th>Last Click</th>
+            </tr>
+          </thead>
+          <tbody id="product-stats">
+            <!-- Data will be inserted here -->
+          </tbody>
+        </table>
+        
+        <h3>Clicks by Link Placement</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Link Location</th>
+              <th>Clicks</th>
+            </tr>
+          </thead>
+          <tbody id="link-stats">
+            <!-- Data will be inserted here -->
+          </tbody>
+        </table>
+        
+        <h3>Clicks by Traffic Source</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Clicks</th>
+            </tr>
+          </thead>
+          <tbody id="source-stats">
+            <!-- Data will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    fetchStatistics();
+  });
+  
+  function fetchStatistics() {
+    const statisticsContainer = document.getElementById('statistics-container');
+    const loadingMessage = document.getElementById('loading-message');
+    const errorMessage = document.getElementById('error-message');
+    
+    fetch('http://localhost:3000/api/analytics')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch analytics data');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.success) {
+          displayStatistics(data);
+          statisticsContainer.style.display = 'block';
+          loadingMessage.style.display = 'none';
+        } else {
+          throw new Error('API returned unsuccessful response');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching analytics:', error);
+        errorMessage.textContent = `Error: ${error.message}. Please try again later.`;
+        errorMessage.style.display = 'block';
+        loadingMessage.style.display = 'none';
+      });
+  }
+  
+  function displayStatistics(data) {
+    // Get the different analytics data
+    const analytics = data.analytics || [];
+    const sourceAnalytics = data.sourceAnalytics || [];
+    const linkAnalytics = data.linkAnalytics || [];
+    
+    // Calculate total clicks
+    let totalClicks = 0;
+    analytics.forEach(item => {
+      totalClicks += parseInt(item.click_count);
+    });
+    
+    // Update summary statistics
+    document.getElementById('total-clicks').textContent = totalClicks;
+    document.getElementById('products-count').textContent = analytics.length;
+    
+    // Find most recent click
+    let latestClick = null;
+    analytics.forEach(item => {
+      const lastClickDate = new Date(item.last_click);
+      if (!latestClick || lastClickDate > latestClick) {
+        latestClick = lastClickDate;
+      }
+    });
+    
+    // Format and display the latest click time
+    if (latestClick) {
+      document.getElementById('last-click').textContent = formatDate(latestClick);
+    }
+    
+    // Populate product statistics table
+    const productStatsTable = document.getElementById('product-stats');
+    productStatsTable.innerHTML = '';
+    
+    if (analytics.length === 0) {
+      const row = document.createElement('tr');
+      row.innerHTML = '<td colspan="4" class="empty-state">No click data recorded yet</td>';
+      productStatsTable.appendChild(row);
+    } else {
+      analytics.forEach(product => {
+        const row = document.createElement('tr');
+        
+        row.innerHTML = `
+          <td>${escapeHtml(product.product_name)}</td>
+          <td>${product.click_count}</td>
+          <td>${formatDate(new Date(product.first_click))}</td>
+          <td>${formatDate(new Date(product.last_click))}</td>
+        `;
+        
+        productStatsTable.appendChild(row);
+      });
+    }
+    
+    // Populate link placement statistics table
+    const linkStatsTable = document.getElementById('link-stats');
+    linkStatsTable.innerHTML = '';
+    
+    if (linkAnalytics.length === 0) {
+      const row = document.createElement('tr');
+      row.innerHTML = '<td colspan="2" class="empty-state">No link placement data recorded yet</td>';
+      linkStatsTable.appendChild(row);
+    } else {
+      linkAnalytics.forEach(link => {
+        const row = document.createElement('tr');
+        
+        row.innerHTML = `
+          <td>${escapeHtml(link.link_id)}</td>
+          <td>${link.click_count}</td>
+        `;
+        
+        linkStatsTable.appendChild(row);
+      });
+    }
+    
+    // Populate source statistics table
+    const sourceStatsTable = document.getElementById('source-stats');
+    sourceStatsTable.innerHTML = '';
+    
+    if (sourceAnalytics.length === 0) {
+      const row = document.createElement('tr');
+      row.innerHTML = '<td colspan="2" class="empty-state">No source data recorded yet</td>';
+      sourceStatsTable.appendChild(row);
+    } else {
+      sourceAnalytics.forEach(source => {
+        const row = document.createElement('tr');
+        
+        row.innerHTML = `
+          <td>${escapeHtml(source.source)}</td>
+          <td>${source.click_count}</td>
+        `;
+        
+        sourceStatsTable.appendChild(row);
+      });
+    }
+  }
+  
+  function formatDate(date) {
+    return date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+  
+  function escapeHtml(unsafe) {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+</script>
+
+<style>
+  .admin-dashboard {
+    padding: 2rem 0;
+  }
+  
+  .admin-section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .statistics-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .stat-card {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 1rem;
+    flex: 1 1 200px;
+    text-align: center;
+  }
+  
+  .stat-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #6c757d;
+  }
+  
+  .stat-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: #212529;
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .data-table th, .data-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .data-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+  }
+  
+  .error-alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  
+  .empty-state {
+    text-align: center;
+    color: #6c757d;
+    padding: 2rem 0;
+  }
+</style>

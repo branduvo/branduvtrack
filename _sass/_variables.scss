@@ -1,0 +1,87 @@
+// Color Variables
+// Primary brand colors
+$primary-color: #4a6bdf;
+$primary-dark: #3a56b2;
+$primary-light: #e7ebff;
+
+// Secondary colors
+$secondary-color: #ff6b45;
+$secondary-dark: #e5583a;
+$secondary-light: #ffece7;
+
+// Neutral colors
+$dark: #222832;
+$medium-dark: #4a5056;
+$medium: #6c757d;
+$medium-light: #abb3bb;
+$light: #e9ecef;
+$white: #ffffff;
+
+// Utility colors
+$success: #28a745;
+$warning: #ffc107;
+$danger: #dc3545;
+$info: #17a2b8;
+
+// Background colors
+$bg-light: #f8f9fa;
+$bg-alt: #f3f5f9;
+
+// Typography
+$font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+$base-font-size: 16px;
+$base-line-height: 1.6;
+$heading-line-height: 1.3;
+
+// Font weights
+$weight-normal: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+
+// Spacing
+$spacing-xs: 0.5rem;    // 8px
+$spacing-sm: 1rem;      // 16px
+$spacing-md: 1.5rem;    // 24px
+$spacing-lg: 2rem;      // 32px
+$spacing-xl: 3rem;      // 48px
+$spacing-xxl: 4rem;     // 64px
+
+// Borders
+$border-radius-sm: 4px;
+$border-radius: 8px;
+$border-radius-lg: 12px;
+$border-width: 1px;
+$border-color: $light;
+
+// Shadows
+$shadow-sm: 0 0.125rem 0.25rem rgba($dark, 0.075);
+$shadow: 0 0.5rem 1rem rgba($dark, 0.1);
+$shadow-lg: 0 1rem 3rem rgba($dark, 0.125);
+$shadow-inset: inset 0 1px 2px rgba($dark, 0.075);
+
+// Transitions
+$transition-base: all 0.2s ease-in-out;
+$transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+// Container widths
+$container-max-width: 1140px;
+$container-narrow: 900px;
+
+// Breakpoints
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Z-index levels
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;

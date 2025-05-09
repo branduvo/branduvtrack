@@ -1,0 +1,114 @@
+---
+layout: default
+title: Branduvo - Premium Tools for Digital Entrepreneurs
+---
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Tools That Boost Your Business Growth</h1>
+      <p class="lead">Discover premium products that help entrepreneurs, creators, and businesses succeed in the digital landscape.</p>
+      {% include cta_button.html text="View Featured Tools" url="#featured-products" %}
+    </div>
+  </div>
+</section>
+
+<section id="featured-products" class="featured-products">
+  <div class="container">
+    <h2 class="section-title">Featured Tools</h2>
+    <p class="section-description">We've tested hundreds of tools so you don't have to. Here are our top picks to help your business thrive.</p>
+    
+    <div class="products-grid">
+      {% for product in site.data.products_featured %}
+        {% include product_card.html 
+          name=product.name 
+          image=product.image 
+          description=product.short_description 
+          url=product.url 
+          category=product.category 
+        %}
+      {% endfor %}
+    </div>
+    
+    <div class="view-all-products">
+      <a href="{{ '/products' | relative_url }}" class="btn btn-secondary">View All Products</a>
+    </div>
+  </div>
+</section>
+
+<section class="benefits">
+  <div class="container">
+    <h2 class="section-title">Why Choose Our Recommendations</h2>
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+        <h3>Thoroughly Tested</h3>
+        <p>We personally test every tool we recommend to ensure it meets our high standards.</p>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        <h3>Value for Money</h3>
+        <p>We focus on tools that provide the best return on investment for your business.</p>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        </div>
+        <h3>Growth-Focused</h3>
+        <p>Every recommended tool is selected to help your business grow and scale efficiently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-title">What Our Readers Say</h2>
+    <div class="testimonials-slider">
+      {% for testimonial in site.data.testimonials %}
+        <div class="testimonial-item">
+          <div class="testimonial-content">
+            <p>"{{ testimonial.quote }}"</p>
+          </div>
+          <div class="testimonial-author">
+            <p class="name">{{ testimonial.name }}</p>
+            <p class="position">{{ testimonial.position }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="recent-posts">
+  <div class="container">
+    <h2 class="section-title">Latest from Our Blog</h2>
+    <div class="posts-grid">
+      {% for post in site.posts limit:3 %}
+        <div class="post-card">
+          <div class="post-content">
+            <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+            <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+            <a href="{{ post.url | relative_url }}" class="read-more">Read More</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="view-all-posts">
+      <a href="{{ '/blog' | relative_url }}" class="btn btn-secondary">View All Posts</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Take Your Business to the Next Level?</h2>
+    <p>Discover the right tools that can transform your workflow and accelerate your growth.</p>
+    {% include cta_button.html text="Explore All Tools" url="/products" %}
+  </div>
+</section>

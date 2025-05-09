@@ -1,0 +1,26 @@
+{% comment %}
+  CTA Button Component
+  
+  Parameters:
+  - text: The text to display on the button
+  - url: The URL the button should link to
+  - class: Optional CSS class(es) to add to the button
+  - newTab: Optional boolean to open link in new tab (true/false)
+{% endcomment %}
+
+{% assign buttonClass = "btn btn-primary" %}
+{% if include.class %}
+  {% assign buttonClass = buttonClass | append: ' ' | append: include.class %}
+{% endif %}
+
+{% assign target = "" %}
+{% if include.newTab %}
+  {% assign target = "_blank" %}
+{% endif %}
+
+<a href="{{ include.url | relative_url }}" class="{{ buttonClass }}" {% if target != "" %}target="{{ target }}" rel="noopener noreferrer"{% endif %}>
+  {{ include.text }}
+  {% if include.icon %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-{{ include.icon }}"><polyline points="9 18 15 12 9 6"></polyline></svg>
+  {% endif %}
+</a>

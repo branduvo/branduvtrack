@@ -1,0 +1,29 @@
+- name: Canva
+  image: svg/canva-logo.svg
+  short_description: Design platform for creating stunning graphics, presentations, and more
+  url: /products/canva/
+  category: Design
+
+- name: FreshBooks
+  image: svg/freshbooks-logo.svg
+  short_description: Cloud accounting software that makes billing and bookkeeping easy
+  url: /products/freshbooks/
+  category: Finance
+
+- name: ConvertKit
+  image: svg/convertkit-logo.svg
+  short_description: Email marketing platform built specifically for creators
+  url: /products/convertkit/
+  category: Email Marketing
+
+- name: Calendly
+  image: svg/calendly-logo.svg
+  short_description: Scheduling software that eliminates the back-and-forth emails
+  url: /products/calendly/
+  category: Productivity
+
+- name: Grammarly
+  image: svg/grammarly-logo.svg
+  short_description: AI-powered writing assistant that helps you communicate clearly
+  url: /products/grammarly/
+  category: Writing
