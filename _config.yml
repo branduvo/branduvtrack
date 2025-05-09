@@ -8,7 +8,7 @@ baseurl: "" # Empty for local development
 url: "" # Empty for local development
 
 # For GitHub Pages deployment uncomment these:
-baseurl: "/branduvotrack" # the subpath of your site, e.g. /blog
+baseurl: "/branduvtrack" # the subpath of your site, e.g. /blog
 url: "https://branduvo.com" # the base hostname & protocol
 
 # Build settings
